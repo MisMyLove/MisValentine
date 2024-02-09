@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Surprise</title>
+    <style>
+        h1{
+            color: #c70039;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f7d4e8;
+        }
+
+        #valentine-question {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #c70039;
+        }
+
+        #messages {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #880e4f;
+        }
+
+        #response-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            font-size: 1em;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: font-size 0.3s;
+            background-color: #ff4081;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #result-message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            display: none;
+            color: #1976D2;
+        }
+
+        #love-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Valentine's Day Surprise!</h1>
+
+    <img id="love-image" src="https://media.tenor.com/SoHUEPDwxTcAAAAj/valentines-love.gif" alt="Love Image">
+    <div id="messages"></div>
+
+    <div id="valentine-question">
+        <p>I have a special question for you...</p>
+        <p>Will you be my Valentine?</p>
+    </div>
+
+    <div id="response-buttons">
+        <button id="yesButton" onclick="respond('yes')">Yes</button>
+        <button id="noButton" onclick="respond('no')">No</button>
+    </div>
+
+    <div id="result-message" onclick="nextMessage()"></div>
+
+    <script>
+        let fontSizeIncrement = 1.0;
+        let currentFontSize = 1.0;
+        let messageIndex = 0;
+        let noButtonClickCount = 0;
+        const maxNoButtonClicks = 5;
+        const messages = [
+            "Sorry darling, cant say no to me:3 You're now my Valentine! (Click yes again!)",
+            "Let's make this day extra special shall we?(Again lovely)",
+            "Hmmmmmmm, what do you think... We meet early at market sa Febuary 15, thursday kasi this is the only time na pede tayo, and hehe may time pako mag ipon MWEHWHE (yes Again)",
+            "Thanks for being my Valentine!(Ontiii nalang)",
+            "Hi Mis, my love, my moonlight, and my everything, from the very first moment we met, there was a spark on my part HASGDASHDAHSD cause you know, we havent even heard of each others name and i already had my eyes on you. Youre a wonder to me, like a mystery nung una, in my eyes you stuck out like a sore thumb, amongst the crowd, you were a standout, drawing my attention. Napaka ganda mo, I love your hair, and the way you acted. As days went by my love for you only grew with each passing day. (Click yes Again) ",
+            " I want you to understand that what I feel for you goes beyond fleeting emotions; it's a genuine promise to be there with you through every twist and turn life throws our way. Whether we're dancing in the sunshine or weathering storms, my commitment is real, grounded in the messy, beautiful reality of life's seasons. (Click yes some more!) ",
+            " And so with this, Ill finish up my love letter to you, always remember that the strength of our love isn't measured by the absence of challenges, but by our resilience in facing them together. As we navigate the ongoing journey of healing and growth, let's be patient with ourselves and each other. Remember that it's okay not to have all the answers right now; what matters is that we're on this path side by side.(Againnn) ",
+            "So, my love, let's celebrate our beautifully messy journey, embrace the healing process, and revel in the strength we discover within ourselves and each other. As we move forward, let's cherish the moments of joy and support each other through the shadows. Our story is still unfolding, and I'm grateful to be writing it with you.(Last na po)",
+            " I love you so much Sweetheart, very much so.",
+        ];
+
+        const noButtonTexts = [
+            "Not interested???",
+            "This time definitely say yes na",
+            "Comeee onnn, say yes lovely",
+            "Pleaseeeeee hehehhe, Say yes to me darling",
+        ];
+
+        function respond(answer) {
+            const resultMessage = document.getElementById('result-message');
+            const yesButton = document.getElementById('yesButton');
+            const noButton = document.getElementById('noButton');
+            const messagesContainer = document.getElementById('messages');
+
+            resultMessage.style.display = 'none';
+
+            if (answer === 'yes') {
+                resultMessage.innerText = messages[messageIndex];
+                resultMessage.style.color = '#ff4081';
+                resultMessage.style.display = 'block';
+                messageIndex++;
+                noButton.style.display = 'none';
+            } else {
+                currentFontSize += fontSizeIncrement;
+                yesButton.style.fontSize = currentFontSize + 'em';
+
+                if (noButtonClickCount < noButtonTexts.length) {
+                    noButton.innerText = noButtonTexts[noButtonClickCount];
+                }
+
+                displayMessages(["Please stop clicking the 'No' button", "Don't click it", "Stappppph! :'( >:( | Isa pa talaga >:(((", "Watch me remove the 'No' button", "Hmpp hehe"]);
+
+                noButtonClickCount++;
+
+                if (noButtonClickCount >= maxNoButtonClicks) {
+                    noButton.style.display = 'none';
+                }
+            }
+        }
+
+        function nextMessage() {
+            const resultMessage = document.getElementById('result-message');
+            if (messageIndex < messages.length) {
+                resultMessage.innerText = messages[messageIndex];
+                messageIndex++;
+            } else {
+                resultMessage.innerText = "That's it! Happy Valentine's Day!";
+                resultMessage.style.color = '#1976D2';
+            }
+        }
+
+        function displayMessages(messagesArray) {
+            const messagesContainer = document.getElementById('messages');
+            messagesContainer.innerHTML = "";
+            const currentMessage = document.createElement('p');
+            currentMessage.innerText = messagesArray[noButtonClickCount - 0];
+            messagesContainer.appendChild(currentMessage);
+        }
+    </script>
+</body>
+
+</html>
